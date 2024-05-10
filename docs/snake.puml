@@ -1,4 +1,47 @@
-@startuml pintor
+@startuml Snake
+
+class Juego
+class Jugador
+
+class Snake
+class Velocidad
+class Movimiento{
+    -X
+    -Y
+}
+
+class Manzana{
+    -generar
+}
+
+class ObjetoDestruible
+class ObjetoIndestructible
+
+class Puntuacion
+class Mapa
+class Muro
+class Musica
+class Partida
+
+
+
+Partida *-- Mapa
+Mapa *-- Muro
+Juego *-- Jugador
+Juego *-- Puntuacion
+Jugador o-- Snake
+Snake *-- Movimiento
+Snake o-- Manzana
+Snake *-- Velocidad
+Velocidad o-- Puntuacion
+Manzana --|> ObjetoDestruible
+Manzana --|> Puntuacion
+Muro --|> ObjetoIndestructible
+Juego *-- Musica
+Juego *-- Partida
+Partida *-- Puntuacion
+
+
 
 
 
