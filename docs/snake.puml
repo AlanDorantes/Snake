@@ -1,48 +1,84 @@
 @startuml Snake
 
-class Juego
-class Jugador
+class JuegoSnake {
 
-class Snake
-class Velocidad
-class Movimiento{
-    -X
-    -Y
 }
 
-class Manzana{
-    -generar
+class Jugador {
+    
 }
 
-class ObjetoDestruible
-class ObjetoIndestructible
+class Snake {
+    +MoverIzquierda(Posicion)
+    +MoverDerecha(Posicion)
+    +MoverArriba(Posicion)
+    +MoverAbajo(Posicion)
+    +Comer(Manzana)
+}
 
-class Puntuacion
-class Mapa
-class Muro
-class Musica
-class Partida
+class Velocidad {
+    +Aumentar(Puntuacion)
+}
+
+class Posicion {
+    -posX
+    -posY
+}
+
+class Posicion {
 
 
+}
+
+class Manzana {
+    +Generar(Posicion)
+    +Desaparecer(Snake)
+}
+
+class ObjetoDestruible {
+    
+}
+
+class ObjetoIndestructible {
+    
+}
+
+class Puntuacion {
+    +IncrementarPuntuacion(Manzana)
+}
+
+class Mapa {
+    
+}
+
+class Muro {
+    
+}
+
+class Musica {
+    +Reproducir()
+    +Pausar()
+}
+
+class Partida {
+    +Iniciar()
+    +Terminar(Snake)
+    +Reiniciar(Snake)
+}
 
 Partida *-- Mapa
 Mapa *-- Muro
-Juego *-- Jugador
-Juego *-- Puntuacion
-Jugador o-- Snake
-Snake *-- Movimiento
+JuegoSnake "1" *-- "1" Jugador
+Jugador "1" o-- "1" Snake
+Snake *-- Posicion
 Snake o-- Manzana
 Snake *-- Velocidad
-Velocidad o-- Puntuacion
+Velocidad "1" o-- "*" Puntuacion
 Manzana --|> ObjetoDestruible
 Manzana --|> Puntuacion
 Muro --|> ObjetoIndestructible
-Juego *-- Musica
-Juego *-- Partida
-Partida *-- Puntuacion
-
-
-
-
+JuegoSnake *-- Musica
+JuegoSnake "1" *-- "*" Partida
+Partida "1" *-- "*" Puntuacion
 
 @enduml
