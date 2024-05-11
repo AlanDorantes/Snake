@@ -5,9 +5,8 @@ class JuegoSnake
 private:
     /* data */
 public:
-    int Iniciar() {
-        
-    }
+    bool Iniciar(){}
+    bool Finalizar(){}
     JuegoSnake(/* args */) {}
     ~JuegoSnake() {}
 };

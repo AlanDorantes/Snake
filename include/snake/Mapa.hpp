@@ -3,7 +3,7 @@
 class Mapa
 {
 private:
-    /* data */
+    int dimensiones;
 public:
     Mapa(/* args */) {}
     ~Mapa() {}
