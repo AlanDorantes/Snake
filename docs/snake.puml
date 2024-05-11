@@ -58,21 +58,21 @@ class Partida {
     +Reiniciar(Snake)
 }
 
-Partida *-- Mapa
 Mapa *-- Muro
-JuegoSnake "1" *-- "1" Jugador
-Jugador "1" o-- "1" Snake
 Jugador "1" *-- "*" Partida
+Jugador "1" o-- "1" Snake
 Snake *-- Posicion
-Snake o-- Manzana
 Snake *-- Velocidad
-Velocidad "1" o-- "*" Puntuacion
-Manzana --|> ObjetoDestruible
-Manzana --|> Puntuacion
-Muro --|> ObjetoIndestructible
+Snake o-- Manzana
+JuegoSnake "1" *-- "1" Jugador
 JuegoSnake *-- Musica
 JuegoSnake "1" *-- "*" Partida
 Partida "1" *-- "*" Puntuacion
+Partida *-- Mapa
 Manzana *-- Posicion
+Manzana --|> ObjetoDestruible
+Manzana --|> Puntuacion
+Velocidad "1" o-- "*" Puntuacion
+Muro --|> ObjetoIndestructible
 
 @enduml

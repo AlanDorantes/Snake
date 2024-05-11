@@ -16,7 +16,7 @@ ___
 - docs/ - Contiene la documentación del proyecto
 - include/ - Son los archivos de cabecera
 
-# Clases
+### Clases
 - JuegoSnake.
 - Jugador.
 - Manzana.

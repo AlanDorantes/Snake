@@ -29,11 +29,13 @@ int main(int argc, char const *argv[])
     string reset;
     int posX = 1;
     int posY = 6;
+    int anchoMayor = 70;
+    int altoMayor = 25;
     while (true)
     {
 
-        Decorator colorFondo = bgcolor(Color::GrayDark);
-        Decorator colorTexto = color(Color::GrayLight);
+        Decorator colorFondo = bgcolor(Color::DarkGreen);
+        Decorator colorTexto = color(Color::SkyBlue1);
         Element dibujo = border({hbox()}) | colorFondo | colorTexto;
 
         Dimensions Alto = Dimension::Fixed(25);
@@ -58,14 +60,14 @@ int main(int argc, char const *argv[])
 
         if (posX > 20)
         {
-            if (posY <= 12)
+            if (posY <= 16)
             {
                 for (auto &&texto : textos)
                 {
-                    int l = -4;
+                    int l = -3;
                     for (auto &&letra : texto)
                     {
-                        pantalla.PixelAt(26, posY + l).character = letra;
+                        pantalla.PixelAt(25, posY + l).character = letra;
                         l++;
                     }
                 }
@@ -73,24 +75,27 @@ int main(int argc, char const *argv[])
             }
         }
 
-        if (posY > 11)
+        if (posY > 16)
         {
-            for (auto &&texto : textos)
+            if (posX <= 64)
             {
-                int i = -1;
-                for (auto &&letra : texto)
+                for (auto &&texto : textos)
                 {
-                    pantalla.PixelAt(posX + i, 13).character = letra;
-                    i++;
+                    int i = -1;
+                    for (auto &&letra : texto)
+                    {
+                        pantalla.PixelAt(posX + i, 18).character = letra;
+                        i++;
+                    }
                 }
+                posX++;
             }
-            posX++;
         }
 
         pantalla.Print();
         reset = pantalla.ResetPosition();
         cout << reset;
-        this_thread::sleep_for(0.75s);
+        this_thread::sleep_for(0.40s);
     }
 
     return 0;
