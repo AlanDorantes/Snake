@@ -6,7 +6,7 @@ class Velocidad
 private:
     /* data */
 public:
-    int Aumentar(Puntuacion){}
+    int Aumentar(Puntuacion) {}
     Velocidad(/* args */) {}
     ~Velocidad() {}
 };

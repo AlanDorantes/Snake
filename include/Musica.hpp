@@ -5,8 +5,8 @@ class Musica
 private:
     /* data */
 public:
-    bool Reproducir(){}
-    bool Pausar(){}
+    bool Reproducir() {}
+    bool Pausar() {}
     Musica(/* args */) {}
     ~Musica() {}
 };

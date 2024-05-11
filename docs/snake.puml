@@ -1,14 +1,14 @@
 @startuml Snake
 
 class JuegoSnake {
-
+    +Inicializar()
+    +Finalizar()
 }
 
-class Jugador {
-    
-}
+class Jugador
 
 class Snake {
+    -tamaño
     +MoverIzquierda(Posicion)
     +MoverDerecha(Posicion)
     +MoverArriba(Posicion)
@@ -25,34 +25,26 @@ class Posicion {
     -posY
 }
 
-class Posicion {
-
-
-}
-
 class Manzana {
     +Generar(Posicion)
     +Desaparecer(Snake)
 }
 
-class ObjetoDestruible {
-    
-}
+class ObjetoDestruible 
 
-class ObjetoIndestructible {
-    
-}
+class ObjetoIndestructible
 
 class Puntuacion {
-    +IncrementarPuntuacion(Manzana)
+    +Incrementar(Manzana)
+    +Reiniciar()
 }
 
 class Mapa {
-    
+    -dimensiones
 }
 
 class Muro {
-    
+    +DetectarColision(Snake)
 }
 
 class Musica {
@@ -70,6 +62,7 @@ Partida *-- Mapa
 Mapa *-- Muro
 JuegoSnake "1" *-- "1" Jugador
 Jugador "1" o-- "1" Snake
+Jugador "1" *-- "*" Partida
 Snake *-- Posicion
 Snake o-- Manzana
 Snake *-- Velocidad
@@ -80,5 +73,6 @@ Muro --|> ObjetoIndestructible
 JuegoSnake *-- Musica
 JuegoSnake "1" *-- "*" Partida
 Partida "1" *-- "*" Puntuacion
+Manzana *-- Posicion
 
 @enduml

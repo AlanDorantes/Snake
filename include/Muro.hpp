@@ -6,7 +6,7 @@ class Muro
 private:
     /* data */
 public:
-    bool DetectarColision(Snake){}
+    bool DetectarColision(Snake) {}
     Muro(/* args */) {}
     ~Muro() {}
 };

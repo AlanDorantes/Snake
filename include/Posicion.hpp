@@ -3,7 +3,9 @@
 class Posicion
 {
 private:
-    /* data */
+    int posX;
+    int posY;
+
 public:
     Posicion(/* args */) {}
     ~Posicion() {}
