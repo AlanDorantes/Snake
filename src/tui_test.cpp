@@ -24,7 +24,6 @@ int main(int argc, char const *argv[])
     }
     imagen.close();
 
-
     int fotograma = 0;
 
     string reset;
@@ -32,7 +31,7 @@ int main(int argc, char const *argv[])
     int posY = 6;
     while (true)
     {
-        
+
         Decorator colorFondo = bgcolor(Color::GrayDark);
         Decorator colorTexto = color(Color::GrayLight);
         Element dibujo = border({hbox()}) | colorFondo | colorTexto;
@@ -59,19 +58,19 @@ int main(int argc, char const *argv[])
 
         if (posX > 20)
         {
-            if(posY <= 12)
-        {
-            for (auto &&texto : textos)
+            if (posY <= 12)
             {
-                int l = -4;
-                for (auto &&letra : texto)
+                for (auto &&texto : textos)
                 {
-                    pantalla.PixelAt(26, posY + l).character = letra;
-                    l++;
+                    int l = -4;
+                    for (auto &&letra : texto)
+                    {
+                        pantalla.PixelAt(26, posY + l).character = letra;
+                        l++;
+                    }
                 }
+                posY++;
             }
-        posY++;
-        }
         }
 
         if (posY > 11)
@@ -88,7 +87,6 @@ int main(int argc, char const *argv[])
             posX++;
         }
 
-       
         pantalla.Print();
         reset = pantalla.ResetPosition();
         cout << reset;
