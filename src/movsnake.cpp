@@ -36,9 +36,9 @@ double velocidad = 0.025;
 
 int main(int argc, char const *argv[]) 
 {
-    sf::RenderWindow window(sf::VideoMode(1000, 600), "DinoChrome");
+    sf::RenderWindow window(sf::VideoMode(600, 400), "DinoChrome");
 
-    Personaje character(sf::Vector2f(100, 500), "./assets/images/snake_cab_i.png");
+    Personaje character(sf::Vector2f(10, 10), "./assets/images/snake_cab_i.png");
 
     while (window.isOpen()) {
         sf::Event event;
@@ -50,29 +50,46 @@ int main(int argc, char const *argv[])
 
         int myConst;
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            character.setTexture("./assets/images/snake_cab_i.png");
-            myConst = 1;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            character.setTexture("./assets/images/snake_cab_d.png");
-            myConst = 2;
-            character.move(velocidad, 0);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            character.setTexture("./assets/images/snake_cab_ar.png");
-            myConst = 3;
-            character.move(0, velocidad * -1);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            character.setTexture("./assets/images/snake_cab_ab.png");
-            character.move(0, velocidad);
-            myConst = 4;
-        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             window.close();
         }
-
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            // No se ejecuta ningún movimiento
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            // No se ejecuta ningún movimiento
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            // No se ejecuta ningún movimiento
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            // No se ejecuta ningún movimiento
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            // No se ejecuta ningún movimiento
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            // No se ejecuta ningún movimiento
+        }
+        else {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            character.setTexture("./assets/images/snake_cab_i.png");
+            myConst = 1;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            character.setTexture("./assets/images/snake_cab_d.png");
+            myConst = 2;
+        }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            character.setTexture("./assets/images/snake_cab_ar.png");
+            myConst = 3;
+        }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            character.setTexture("./assets/images/snake_cab_ab.png");
+            myConst = 4;
+        }
+        }
+        
         if (myConst == 1) {
             character.move(velocidad * -1, 0);
         }
@@ -94,7 +111,7 @@ int main(int argc, char const *argv[])
         }
     
 
-        window.clear();
+        window.clear(sf::Color::Blue);
         character.draw(window);
         window.display();
     }

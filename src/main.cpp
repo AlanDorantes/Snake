@@ -1,9 +1,9 @@
-#include <iostream>
-#include <JuegoSnake.hpp>
+#include "GameSnake.hpp"
 
-int main(int argc, char const *argv[])
+int main()
 {
-    JuegoSnake j;
-    j.Iniciar();
+    GameSnake game;
+    game.Run();
+
     return 0;
 }
