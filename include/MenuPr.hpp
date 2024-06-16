@@ -9,6 +9,8 @@
 #include <GameSnake.hpp>
 #include <Control.hpp>
 
+#include "GamePlay.hpp"
+
 class MenuPr : public Engine::State
 {
     private:
@@ -129,7 +131,7 @@ class MenuPr : public Engine::State
             if(m_jugarPressed)
             {
                 // Todo:
-                // Go to Play State
+                m_control->m_states->Add(std::make_unique<GamePlay>(m_control), true);
             }
             else if(m_salirPressed)
             {
