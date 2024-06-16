@@ -31,10 +31,10 @@ public:
 
     void Init() override
     {
-        m_control->m_assets->AddTexture(MAPA, "assets/textures/mapa.png", true);
-        m_control->m_assets->AddTexture(MANZANA, "assets/textures/manzana.png");
-        m_control->m_assets->AddTexture(MURO, "assets/textures/muro.png", true);
-        m_control->m_assets->AddTexture(SNAKE, "assets/textures/snake.png");
+        m_control->m_assets->AddTexture(MAPA, "assets/images/mapa.png", true);
+        m_control->m_assets->AddTexture(MANZANA, "assets/images/manzana.png");
+        m_control->m_assets->AddTexture(MURO, "assets/images/muro.png", true);
+        m_control->m_assets->AddTexture(SNAKE, "assets/images/snake.png");
 
         m_mapa.setTexture(m_control->m_assets->GetTexture(MAPA));
         m_mapa.setTextureRect(m_control->m_window->getViewport(m_control->m_window->getDefaultView()));
