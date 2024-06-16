@@ -20,14 +20,46 @@ private:
     //added snake
 
 public:
-    GamePlay(std::shared_ptr<Control> &control);
-    ~GamePlay() {}
+    GamePlay(std::shared_ptr<Control> &control)
+        : m_control(control)
+    {
+    } 
+    ~GamePlay() 
+    {
 
-        void Init() override;
-        void ProcessInput() override;
-        void Update(sf::Time deltaTime) override;
-        void Draw() override;
-        void Pause() override;
-        void Start() override;
+    }
+
+    void Init() override
+    {
+        m_control->m_assets->AddTexture(MAPA, "assets/textures/mapa.png", true);
+        m_control->m_assets->AddTexture(MANZANA, "assets/textures/manzana.png");
+        m_control->m_assets->AddTexture(MURO, "assets/textures/muro.png", true);
+        m_control->m_assets->AddTexture(SNAKE, "assets/textures/snake.png");
+
+        m_mapa.setTexture(m_control->m_assets->GetTexture(MAPA));
+        m_mapa.setTextureRect(m_control->m_window->getViewport(m_control->m_window->getDefaultView()));
+    }
+    void ProcessInput() override
+    {
+
+    }
+    void Update(sf::Time deltaTime) override
+    {
+
+    }
+    void Draw() override
+    {
+        m_control->m_window->clear();
+        m_control->m_window->draw(m_mapa);
+        m_control->m_window->display();
+    }
+    void Pause() override
+    {
+
+    }
+    void Start() override
+    {
+
+    }
     
 };
