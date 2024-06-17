@@ -111,6 +111,7 @@ public:
             }
         }
     }
+
     void Update(sf::Time deltaTime) override
     {
         m_tiempoTranscurrido += deltaTime;
@@ -130,7 +131,7 @@ public:
 
             if(m_snake.Colision(m_manzana))
             {
-                m_snake.Crecer(m_snakeDireccion);
+                m_snake.Crecer(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE));
 
                 int x = 0, y = 0;
                 x = std::clamp<int>(rand() % m_control->m_window->getSize().x, 16, m_control->m_window->getSize().x - 2*16) / 16;
@@ -140,11 +141,27 @@ public:
             }
             else
             {
-                m_snake.Mover(m_snakeDireccion);
+                if (m_snakeDireccion == sf::Vector2f(0.f, -16.f))
+                {
+                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_AR), m_control->m_assets->GetTexture(SNAKE));
+                }
+                else if (m_snakeDireccion == sf::Vector2f(0.f, 16.f))
+                {
+                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_AB), m_control->m_assets->GetTexture(SNAKE));
+                }
+                else if (m_snakeDireccion == sf::Vector2f(-16.f, 0.f))
+                {
+                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_I), m_control->m_assets->GetTexture(SNAKE));
+                }
+                else if (m_snakeDireccion == sf::Vector2f(16.f, 0.f))
+                {
+                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_D), m_control->m_assets->GetTexture(SNAKE));
+                }
             }
             m_tiempoTranscurrido = sf::Time::Zero;
         }
     }
+   
     void Draw() override
     {
         m_control->m_window->clear();
