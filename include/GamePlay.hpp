@@ -8,6 +8,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Event.hpp>
 
+#include "GameOver.hpp"
 #include "GameSnake.hpp"
 #include "State.hpp"
 #include "Snake.hpp"
@@ -123,7 +124,7 @@ public:
                 if(m_snake.Colision(muro))
                 {
                     //Todo:
-                    //Go to GameOver State
+                    m_control->m_states->Add(std::make_unique<GameOver>(m_control), true);
                     break;
                 }
             }
