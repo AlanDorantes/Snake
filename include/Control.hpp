@@ -17,7 +17,11 @@ enum AssetID
     MAPA,
     MANZANA,
     MURO,
-    SNAKE
+    SNAKE,
+    SNAKE_HEAD_AB,
+    SNAKE_HEAD_AR,
+    SNAKE_HEAD_D,
+    SNAKE_HEAD_I
 };
 
 //Estructura que contiene los controles de la aplicacion 
