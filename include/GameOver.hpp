@@ -1,3 +1,5 @@
+#pragma once
+
 #include <memory>
 
 #include <SFML/Graphics/Text.hpp>
@@ -7,7 +9,7 @@
 #include <GameSnake.hpp>
 #include <Control.hpp>
 
-#include "GamePlay.hpp"
+#include <GamePlay.hpp>
 
 class GameOver : public Engine::State
 {
@@ -24,21 +26,20 @@ class GameOver : public Engine::State
         bool m_reintentarPressed;
         bool m_salirPressed;
 
-public:
-        GameOver(std::shared_ptr<Control> &control) : 
-        m_control(control) , m_reintentarSelected(true), 
-        m_reintentarSelected(false), m_jugarPressed(false), 
-        m_salirPressed(false)
+    public:
+        GameOver(std::shared_ptr<Control> &control) 
+        : m_control(control) , m_reintentarSelected(true), 
+          m_reintentarPressed(false), m_salirSelected(false), 
+          m_salirPressed(false)
         {
-            
+        }
+        ~GameOver()
+        {
         }
 
-
-        ~GameOver()
-
-void Init() override
+        void Init() override
         {
-            //Configura el titulo
+            //Configura el mensaje de game over
             m_gameOverTitulo.setFont(m_control->m_assets->GetFont(MAIN_FONT));
             m_gameOverTitulo.setString("GAME OVER");
             m_gameOverTitulo.setCharacterSize(50);
@@ -46,16 +47,16 @@ void Init() override
             m_gameOverTitulo.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 4);
 
 
-            //Configura el boton jugar
-            _reintentar.setFont(m_control->m_assets->GetFont(MAIN_FONT));
-            _reintentar.setString("REINTENTAR");
-            _reintentar.setOrigin(_reintentar.getLocalBounds().width / 2, _reintentar.getLocalBounds().height / 2);
-            _reintentar.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2 + 25.f);
+            //Configura el boton reintentar
+            m_reintentar.setFont(m_control->m_assets->GetFont(MAIN_FONT));
+            m_reintentar.setString("REINTENTAR");
+            m_reintentar.setOrigin(m_reintentar.getLocalBounds().width / 2, m_reintentar.getLocalBounds().height / 2);
+            m_reintentar.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2 + 25.f);
 
             //Configura el boton salir
             m_salir.setFont(m_control->m_assets->GetFont(MAIN_FONT));
             m_salir.setString("EXIT");
-            m_salir.setOrigin(m_jugar.getLocalBounds().width / 2, m_jugar.getLocalBounds().height / 2);
+            m_salir.setOrigin(m_salir.getLocalBounds().width / 2, m_salir.getLocalBounds().height / 2);
             m_salir.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2 + 75.f);
         }
 
@@ -125,7 +126,6 @@ void Init() override
 
             if(m_reintentarPressed)
             {
-                // Todo:
                 m_control->m_states->Add(std::make_unique<GamePlay>(m_control), true);
             }
             else if(m_salirPressed)

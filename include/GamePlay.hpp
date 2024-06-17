@@ -123,7 +123,6 @@ public:
             {
                 if(m_snake.Colision(muro))
                 {
-                    //Todo:
                     m_control->m_states->Add(std::make_unique<GameOver>(m_control), true);
                     break;
                 }

@@ -31,8 +31,7 @@ class MenuPr : public Engine::State
         m_control(control) , m_jugarSelected(true), 
         m_salirSelected(false), m_jugarPressed(false), 
         m_salirPressed(false)
-        {
-            
+        {  
         }
         ~MenuPr()
         {
