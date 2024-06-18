@@ -19,19 +19,19 @@ namespace Motor
         Assets()
         {
         }
-        
+
         ~Assets()
         {
         }
-        
+
         void AgregarTextura(int id, const std::string &filePath, bool wantRepeated = false)
         {
             auto texture = std::make_unique<sf::Texture>();
 
             if (texture->loadFromFile(filePath))
             {
-              texture->setRepeated(wantRepeated);
-              m_textures[id] = std::move(texture);
+                texture->setRepeated(wantRepeated);
+                m_textures[id] = std::move(texture);
             }
         }
 
@@ -39,6 +39,5 @@ namespace Motor
         {
             return *(m_textures.at(id).get());
         }
-
     };
 }

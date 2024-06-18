@@ -10,9 +10,9 @@
 #include <AssetCtrl.hpp>
 #include <MenuPr.hpp>
 
-//Ayuda a identificar los recursos que se cargan en el juego, el ID de los recursos
+// Ayuda a identificar los recursos que se cargan en el juego, el ID de los recursos
 enum AssetID
-{   
+{
     MAIN_FONT = 0,
     MAPA,
     MANZANA,
@@ -26,15 +26,15 @@ enum AssetID
     MUSICA
 };
 
-//Estructura que contiene los controles de la aplicacion 
-//Ventana, control de estados y control de recursos
+// Estructura que contiene los controles de la aplicacion
+// Ventana, control de estados y control de recursos
 struct Control
 {
     std::unique_ptr<sf::RenderWindow> m_window;
     std::unique_ptr<Engine::StateCtrl> m_states;
     std::unique_ptr<Engine::AssetCtrl> m_assets;
 
-    //Constructor que inicializa los punteros unicos
+    // Constructor que inicializa los punteros unicos
     Control()
     {
         m_window = std::make_unique<sf::RenderWindow>();

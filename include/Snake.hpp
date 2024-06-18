@@ -27,13 +27,13 @@ public:
     void Init(const sf::Texture &textura, const sf::Texture &texturaPrimeraPieza)
     {
         float x = 16.f;
-        for(auto &piece : m_cuerpo)
+        for (auto &piece : m_cuerpo)
         {
-            if (&piece == &(*--m_cuerpo.end())) 
+            if (&piece == &(*--m_cuerpo.end()))
             {
                 piece.setTexture(texturaPrimeraPieza);
-            } 
-            else 
+            }
+            else
             {
                 piece.setTexture(textura);
             }
@@ -62,7 +62,7 @@ public:
         m_cabeza->setTexture(texturaPrimeraPieza);
     }
 
-    bool Colision(const sf::Sprite& objeto) const
+    bool Colision(const sf::Sprite &objeto) const
     {
         // COLISION CON MUROS
         sf::FloatRect cabezaBounds = m_cabeza->getGlobalBounds();
@@ -84,8 +84,7 @@ public:
         }
         return false;
     }
-        
-    
+
     void Crecer(const sf::Vector2f &direccion, const sf::Texture &textura)
     {
         sf::Sprite nuevaPieza;
@@ -117,10 +116,9 @@ public:
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override
     {
-        for(auto &piece : m_cuerpo)
+        for (auto &piece : m_cuerpo)
         {
             target.draw(piece);
         }
     }
-
 };

@@ -15,7 +15,6 @@
 #include "State.hpp"
 #include "Snake.hpp"
 
-
 class GamePlay : public Engine::State
 {
 private:
@@ -23,7 +22,7 @@ private:
     sf::Sprite m_mapa;
     sf::Sprite m_manzana;
     sf::Music m_musica;
-    std::array<sf::Sprite, 4 > m_muro;
+    std::array<sf::Sprite, 4> m_muro;
     Snake m_snake;
     sf::Text m_scoreText;
     int m_score;
@@ -33,17 +32,16 @@ private:
 
 public:
     GamePlay(std::shared_ptr<Control> &control)
-        : m_control(control), 
-          m_snakeDireccion({16.f, 0.f}), 
+        : m_control(control),
+          m_snakeDireccion({16.f, 0.f}),
           m_tiempoTranscurrido(sf::Time::Zero),
           m_score(0)
     {
         srand(time(nullptr));
         int m_score;
-    } 
-    ~GamePlay() 
+    }
+    ~GamePlay()
     {
-
     }
 
     void Init() override
@@ -57,12 +55,10 @@ public:
         m_control->m_assets->AddTexture(SNAKE_HEAD_AR, "assets/images/snake_cab_ar.png");
         m_control->m_assets->AddTexture(SNAKE_HEAD_AB, "assets/images/snake_cab_ab.png");
 
-
-
         m_mapa.setTexture(m_control->m_assets->GetTexture(MAPA));
         m_mapa.setTextureRect(m_control->m_window->getViewport(m_control->m_window->getDefaultView()));
 
-        for(auto &muro : m_muro)
+        for (auto &muro : m_muro)
         {
             muro.setTexture(m_control->m_assets->GetTexture(MURO));
         }
@@ -86,7 +82,6 @@ public:
         m_scoreText.setFillColor(sf::Color::White);
         m_scoreText.setOrigin(m_scoreText.getGlobalBounds().width / 2, m_scoreText.getGlobalBounds().height / 2);
         m_scoreText.setPosition(m_control->m_window->getSize().x / 2, 4);
-
     }
     void ProcessInput() override
     {
@@ -107,19 +102,19 @@ public:
                     break;
                 case sf::Keyboard::Down:
                     newDireccion = {0.f, 16.f};
-                    break; 
-                case sf::Keyboard::Left:    
+                    break;
+                case sf::Keyboard::Left:
                     newDireccion = {-16.f, 0.f};
                     break;
                 case sf::Keyboard::Right:
                     newDireccion = {16.f, 0.f};
                     break;
-                
+
                 default:
                     break;
                 }
 
-                if(std::abs(m_snakeDireccion.x) != std::abs(newDireccion.x) || std::abs(m_snakeDireccion.y) != std::abs(newDireccion.y))
+                if (std::abs(m_snakeDireccion.x) != std::abs(newDireccion.x) || std::abs(m_snakeDireccion.y) != std::abs(newDireccion.y))
                 {
                     m_snakeDireccion = newDireccion;
                 }
@@ -135,26 +130,30 @@ public:
         {
             bool colisionMuro = false;
 
-            for(auto &muro : m_muro)
+            for (auto &muro : m_muro)
             {
-                if(m_snake.Colision(muro))
+                if (m_snake.Colision(muro))
                 {
                     m_control->m_states->Add(std::make_unique<GameOver>(m_control), true);
                     break;
                 }
             }
 
-            if(m_snake.Colision(m_manzana))
+            if (m_snake.Colision(m_manzana))
             {
                 m_snake.Crecer(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE));
 
                 int x = 0, y = 0;
-                x = std::clamp<int>(rand() % m_control->m_window->getSize().x, 16, m_control->m_window->getSize().x - 2*16) / 16;
-                y = std::clamp<int>(rand() % m_control->m_window->getSize().y, 16, m_control->m_window->getSize().y - 2*16) / 16;
+                x = std::clamp<int>(rand() % m_control->m_window->getSize().x, 16, m_control->m_window->getSize().x - 2 * 16) / 16;
+                y = std::clamp<int>(rand() % m_control->m_window->getSize().y, 16, m_control->m_window->getSize().y - 2 * 16) / 16;
 
                 m_manzana.setPosition(x * 16, y * 16);
                 m_score += 10;
                 m_scoreText.setString("Score: " + std::to_string(m_score));
+
+                sf::Music music;
+                music.openFromFile("assets/sounds/eat.ogg");
+                music.play();
             }
             else
             {
@@ -175,8 +174,8 @@ public:
                     m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_D), m_control->m_assets->GetTexture(SNAKE));
                 }
             }
-            
-            if(m_snake.AutoColision())
+
+            if (m_snake.AutoColision())
             {
                 m_control->m_states->Add(std::make_unique<GameOver>(m_control), true);
             }
@@ -184,13 +183,13 @@ public:
             m_tiempoTranscurrido = sf::Time::Zero;
         }
     }
-   
+
     void Draw() override
     {
         m_control->m_window->clear();
         m_control->m_window->draw(m_mapa);
 
-        for(auto &muro : m_muro)
+        for (auto &muro : m_muro)
         {
             m_control->m_window->draw(muro);
         }
@@ -203,11 +202,8 @@ public:
     }
     void Pause() override
     {
-
     }
     void Start() override
     {
-
     }
-    
 };
