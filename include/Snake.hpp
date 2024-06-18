@@ -85,8 +85,15 @@ public:
                 return true;
             }
         }
-
         
+        // COLISION CON EL CUERPO
+        for (auto it = m_cuerpo.begin(); it != --m_cuerpo.end(); ++it)
+        {
+            if (m_cabeza->getGlobalBounds().intersects(it->getGlobalBounds()) && it != m_cabeza)
+            {
+                return true;
+            }
+        }
 
         return false;
     }

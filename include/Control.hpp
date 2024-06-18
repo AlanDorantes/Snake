@@ -21,7 +21,9 @@ enum AssetID
     SNAKE_HEAD_AB,
     SNAKE_HEAD_AR,
     SNAKE_HEAD_D,
-    SNAKE_HEAD_I
+    SNAKE_HEAD_I,
+    FONDO,
+    MUSICA
 };
 
 //Estructura que contiene los controles de la aplicacion 

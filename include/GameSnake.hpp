@@ -16,7 +16,7 @@ class GameSnake
     public:
         GameSnake() : m_control(std::make_shared<Control>())
         {
-            //Crea una ventana de 800x600 pixeles
+            //Crea una ventana de 640x352 pixeles
             m_control->m_window->create(sf::VideoMode(640, 352), "Snake Game", sf::Style::Close);
             m_control->m_states->Add(std::make_unique<MenuPr>(m_control));
         }

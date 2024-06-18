@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Audio.hpp>
 
 #include "GameOver.hpp"
 #include "GameSnake.hpp"
@@ -20,6 +21,7 @@ private:
     std::shared_ptr<Control> m_control;
     sf::Sprite m_mapa;
     sf::Sprite m_manzana;
+    sf::Music m_musica;
     std::array<sf::Sprite, 4 > m_muro;
     Snake m_snake;
 
@@ -58,12 +60,12 @@ public:
             muro.setTexture(m_control->m_assets->GetTexture(MURO));
         }
 
-        m_muro[0].setTextureRect({0, 0, m_control->m_window->getSize().x, 16});
-        m_muro[1].setTextureRect({0, 0, m_control->m_window->getSize().x, 16});
+        m_muro[0].setTextureRect({0, 0, (int)m_control->m_window->getSize().x, 16});
+        m_muro[1].setTextureRect({0, 0, (int)m_control->m_window->getSize().x, 16});
         m_muro[1].setPosition(0, m_control->m_window->getSize().y - 16);
 
-        m_muro[2].setTextureRect({0, 0, 16, m_control->m_window->getSize().y});
-        m_muro[3].setTextureRect({0, 0, 16, m_control->m_window->getSize().y});
+        m_muro[2].setTextureRect({0, 0, 16, (int)m_control->m_window->getSize().y});
+        m_muro[3].setTextureRect({0, 0, 16, (int)m_control->m_window->getSize().y});
         m_muro[3].setPosition(m_control->m_window->getSize().x - 16, 0);
 
         m_manzana.setTexture(m_control->m_assets->GetTexture(MANZANA));

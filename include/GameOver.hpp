@@ -20,18 +20,16 @@ class GameOver : public Engine::State
         std::shared_ptr<Control> m_control;
 
         sf::Text m_gameOverTitulo;
-        sf::Text m_reintentar;
+        sf::Text m_puntuacion;
         sf::Text m_salir;
+        sf::Sprite m_fondo;
 
-        bool m_reintentarSelected;
         bool m_salirSelected;
-        bool m_reintentarPressed;
         bool m_salirPressed;
 
     public:
         GameOver(std::shared_ptr<Control> &control) 
-        : m_control(control) , m_reintentarSelected(true), 
-          m_reintentarPressed(false), m_salirSelected(false), 
+        : m_control(control), m_salirSelected(false), 
           m_salirPressed(false)
         {
         }
@@ -41,23 +39,38 @@ class GameOver : public Engine::State
 
         void Init() override
         {
+            //Carga fondo
+            m_fondo.setTexture(m_control->m_assets->GetTexture(FONDO));
+
             //Configura el mensaje de game over
             m_gameOverTitulo.setFont(m_control->m_assets->GetFont(MAIN_FONT));
             m_gameOverTitulo.setString("GAME OVER");
-            m_gameOverTitulo.setCharacterSize(50);
+            m_gameOverTitulo.setCharacterSize(80);
+            m_gameOverTitulo.setFillColor(sf::Color::Red);
+            m_gameOverTitulo.setStyle(sf::Text::Bold);
+            m_gameOverTitulo.setOutlineColor(sf::Color::Black);
+            m_gameOverTitulo.setOutlineThickness(3);
             m_gameOverTitulo.setOrigin(m_gameOverTitulo.getLocalBounds().width / 2, m_gameOverTitulo.getLocalBounds().height / 2);
             m_gameOverTitulo.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 4);
 
 
-            //Configura el boton reintentar
-            m_reintentar.setFont(m_control->m_assets->GetFont(MAIN_FONT));
-            m_reintentar.setString("REINTENTAR");
-            m_reintentar.setOrigin(m_reintentar.getLocalBounds().width / 2, m_reintentar.getLocalBounds().height / 2);
-            m_reintentar.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2 + 25.f);
+            //Configura el boton puntuacion
+            m_puntuacion.setFont(m_control->m_assets->GetFont(MAIN_FONT));
+            m_puntuacion.setString("SCORE: ");
+            m_puntuacion.setCharacterSize(40);
+            m_puntuacion.setFillColor(sf::Color::Black);
+            m_puntuacion.setOutlineThickness(2);
+            m_puntuacion.setOutlineColor(sf::Color::White);
+            m_puntuacion.setOrigin(m_puntuacion.getLocalBounds().width / 2, m_puntuacion.getLocalBounds().height / 2);
+            m_puntuacion.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2 + 25.f);
 
             //Configura el boton salir
             m_salir.setFont(m_control->m_assets->GetFont(MAIN_FONT));
             m_salir.setString("EXIT");
+            m_salir.setCharacterSize(40);
+            m_salir.setFillColor(sf::Color::Red);
+            m_salir.setOutlineThickness(2);
+            m_salir.setOutlineColor(sf::Color::Black);
             m_salir.setOrigin(m_salir.getLocalBounds().width / 2, m_salir.getLocalBounds().height / 2);
             m_salir.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2 + 75.f);
         }
@@ -71,43 +84,17 @@ class GameOver : public Engine::State
                 {
                     m_control->m_window->close();
                 }
-                else if(event.type == sf::Event::KeyPressed)
+                else if (event.type == sf::Event::KeyPressed)
                 {
-                    switch (event.key.code)
+                    m_salirSelected = true;
+                            
+                    if (sf::Keyboard::Enter == event.key.code)
                     {
-                        case sf::Keyboard::Up:    
-                        {
-                            if(!m_reintentarSelected)
-                            {
-                                m_reintentarSelected = true;
-                                m_salirSelected = false;
-                            }
-                            break;
-                        }
-                        case sf::Keyboard::Down:    
-                        {
-                            if(!m_salirSelected)
-                            {
-                                m_reintentarSelected = false;
-                                m_salirSelected = true;
-                            }
-                            break;
-                        }
-                        case sf::Keyboard::Return:    
-                        {
-                            m_reintentarPressed = false;
-                            m_salirPressed = false;
-                            if(m_reintentarSelected)
-                            {
-                                m_reintentarPressed = true;
-                            }
-                            else
-                            {
-                                m_salirPressed = true;
-                            }
-                            break;
-                        }
-
+                        m_salirPressed = true;
+                    }
+                    else
+                    {
+                        m_salirPressed = false;
                     }
                 }
             }
@@ -115,22 +102,7 @@ class GameOver : public Engine::State
 
         void Update(sf::Time deltaTime) override
         {
-            if(m_reintentarSelected)
-            {
-                m_reintentar.setFillColor(sf::Color::Red);
-                m_salir.setFillColor(sf::Color::White);
-            }
-            else
-            {
-                m_reintentar.setFillColor(sf::Color::White);
-                m_salir.setFillColor(sf::Color::Red);
-            }
-
-            if(m_reintentarPressed)
-            {
-            /////////////
-            }
-            else if(m_salirPressed)
+            if(m_salirPressed)
             {
                 m_control->m_window->close();
             }
@@ -139,8 +111,9 @@ class GameOver : public Engine::State
         void Draw() override
         {
             m_control->m_window->clear();
+            m_control->m_window->draw(m_fondo);
             m_control->m_window->draw(m_gameOverTitulo);
-            m_control->m_window->draw(m_reintentar);
+            m_control->m_window->draw(m_puntuacion);
             m_control->m_window->draw(m_salir);
             m_control->m_window->display();
         }

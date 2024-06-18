@@ -4,6 +4,7 @@
 #include <string>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 
 namespace Motor
 {
@@ -12,6 +13,7 @@ namespace Motor
     private:
         std::map<int, std::unique_ptr<sf::Texture>> m_textures;
         std::map<int, std::unique_ptr<sf::Font>> m_fonts;
+        std::map<int, std::unique_ptr<sf::SoundBuffer>> m_soundBuffers;
 
     public:
         Assets()
