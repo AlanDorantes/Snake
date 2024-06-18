@@ -12,6 +12,7 @@
 #include <GamePlay.hpp>
 #include <State.hpp>
 #include <StateCtrl.hpp>
+#include <Snake.hpp>
 
 class GameOver : public Engine::State
 {
@@ -52,17 +53,6 @@ class GameOver : public Engine::State
             m_gameOverTitulo.setOutlineThickness(3);
             m_gameOverTitulo.setOrigin(m_gameOverTitulo.getLocalBounds().width / 2, m_gameOverTitulo.getLocalBounds().height / 2);
             m_gameOverTitulo.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 4);
-
-
-            //Configura el boton puntuacion
-            m_puntuacion.setFont(m_control->m_assets->GetFont(MAIN_FONT));
-            m_puntuacion.setString("SCORE: ");
-            m_puntuacion.setCharacterSize(40);
-            m_puntuacion.setFillColor(sf::Color::Black);
-            m_puntuacion.setOutlineThickness(2);
-            m_puntuacion.setOutlineColor(sf::Color::White);
-            m_puntuacion.setOrigin(m_puntuacion.getLocalBounds().width / 2, m_puntuacion.getLocalBounds().height / 2);
-            m_puntuacion.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2 + 25.f);
 
             //Configura el boton salir
             m_salir.setFont(m_control->m_assets->GetFont(MAIN_FONT));
@@ -113,7 +103,6 @@ class GameOver : public Engine::State
             m_control->m_window->clear();
             m_control->m_window->draw(m_fondo);
             m_control->m_window->draw(m_gameOverTitulo);
-            m_control->m_window->draw(m_puntuacion);
             m_control->m_window->draw(m_salir);
             m_control->m_window->display();
         }

@@ -26,8 +26,6 @@ class GameSnake
 
         void Run()
         {
-            sf::CircleShape shape(100.f);
-            shape.setFillColor(sf::Color::Green);
 
             sf::Clock clock;
             //Guarda el tiempo transcurrido desde la ultima actualizacion

@@ -8,7 +8,7 @@
 
 class Snake : public sf::Drawable
 {
-private:
+public:
     std::list<sf::Sprite> m_cuerpo;
     std::list<sf::Sprite>::iterator m_cabeza;
     std::list<sf::Sprite>::iterator m_cola;
@@ -77,24 +77,11 @@ public:
             return true;
         }
 
-        // COLISION CON MANZANA
-        for (auto it = m_cuerpo.begin(); it != m_cuerpo.end(); ++it)
+        // COLISION CON OTROS OBJETOS
+        if (m_cabeza->getGlobalBounds().intersects(objeto.getGlobalBounds()))
         {
-            if (it != m_cabeza && it->getGlobalBounds().intersects(objeto.getGlobalBounds()))
-            {
-                return true;
-            }
+            return true;
         }
-        
-        // COLISION CON EL CUERPO
-        for (auto it = m_cuerpo.begin(); it != --m_cuerpo.end(); ++it)
-        {
-            if (m_cabeza->getGlobalBounds().intersects(it->getGlobalBounds()) && it != m_cabeza)
-            {
-                return true;
-            }
-        }
-
         return false;
     }
         
@@ -108,13 +95,32 @@ public:
         m_cabeza = m_cuerpo.insert(++m_cabeza, nuevaPieza);
     }
 
+    bool AutoColision() const
+    {
+        bool flag = false;
+
+        for (auto piece = m_cuerpo.begin(); piece != m_cuerpo.end(); ++piece)
+        {
+            if (m_cabeza != piece)
+            {
+                flag = Colision(*piece);
+
+                if (flag)
+                {
+                    break;
+                }
+            }
+        }
+
+        return flag;
+    }
+
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override
     {
         for(auto &piece : m_cuerpo)
         {
             target.draw(piece);
         }
-        
     }
 
 };

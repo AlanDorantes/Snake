@@ -8,6 +8,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 #include "GameOver.hpp"
 #include "GameSnake.hpp"
@@ -24,6 +25,8 @@ private:
     sf::Music m_musica;
     std::array<sf::Sprite, 4 > m_muro;
     Snake m_snake;
+    sf::Text m_scoreText;
+    int m_score;
 
     sf::Vector2f m_snakeDireccion;
     sf::Time m_tiempoTranscurrido;
@@ -32,9 +35,11 @@ public:
     GamePlay(std::shared_ptr<Control> &control)
         : m_control(control), 
           m_snakeDireccion({16.f, 0.f}), 
-          m_tiempoTranscurrido(sf::Time::Zero)
+          m_tiempoTranscurrido(sf::Time::Zero),
+          m_score(0)
     {
         srand(time(nullptr));
+        int m_score;
     } 
     ~GamePlay() 
     {
@@ -51,6 +56,8 @@ public:
         m_control->m_assets->AddTexture(SNAKE_HEAD_D, "assets/images/snake_cab_d.png");
         m_control->m_assets->AddTexture(SNAKE_HEAD_AR, "assets/images/snake_cab_ar.png");
         m_control->m_assets->AddTexture(SNAKE_HEAD_AB, "assets/images/snake_cab_ab.png");
+
+
 
         m_mapa.setTexture(m_control->m_assets->GetTexture(MAPA));
         m_mapa.setTextureRect(m_control->m_window->getViewport(m_control->m_window->getDefaultView()));
@@ -72,7 +79,13 @@ public:
         m_manzana.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2);
 
         m_snake.Init(m_control->m_assets->GetTexture(SNAKE), m_control->m_assets->GetTexture(SNAKE_HEAD_D));
-        
+
+        m_scoreText.setFont(m_control->m_assets->GetFont(MAIN_FONT));
+        m_scoreText.setString("Score: " + std::to_string(m_score));
+        m_scoreText.setCharacterSize(14);
+        m_scoreText.setFillColor(sf::Color::White);
+        m_scoreText.setOrigin(m_scoreText.getGlobalBounds().width / 2, m_scoreText.getGlobalBounds().height / 2);
+        m_scoreText.setPosition(m_control->m_window->getSize().x / 2, 4);
 
     }
     void ProcessInput() override
@@ -140,6 +153,8 @@ public:
                 y = std::clamp<int>(rand() % m_control->m_window->getSize().y, 16, m_control->m_window->getSize().y - 2*16) / 16;
 
                 m_manzana.setPosition(x * 16, y * 16);
+                m_score += 10;
+                m_scoreText.setString("Score: " + std::to_string(m_score));
             }
             else
             {
@@ -160,6 +175,12 @@ public:
                     m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_D), m_control->m_assets->GetTexture(SNAKE));
                 }
             }
+            
+            if(m_snake.AutoColision())
+            {
+                m_control->m_states->Add(std::make_unique<GameOver>(m_control), true);
+            }
+
             m_tiempoTranscurrido = sf::Time::Zero;
         }
     }
@@ -176,6 +197,8 @@ public:
 
         m_control->m_window->draw(m_manzana);
         m_control->m_window->draw(m_snake);
+        m_control->m_window->draw(m_scoreText);
+
         m_control->m_window->display();
     }
     void Pause() override
