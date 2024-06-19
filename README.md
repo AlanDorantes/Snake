@@ -1,5 +1,12 @@
 # SNAKE
 
+Proyecto desarrollado sobre MinGW64 utilizando Msys2
+y editor Visual Studio Code.
+
+## Desarrolladores
+#### Alan Dorantes Verdin #23110139 
+#### Josue Gael Guzman Chavez #23110129
+
 ## Objetivo
 El objetivo de este proyecto es hacer un juego, con ayuda de arte ascii que se ejecute en la misma terminal de Ubuntu, basado en el juego arcade Snake, y así reforzar los conocimientos que se han aprendido a lo largo del curso de Programación Avanzada.
 
@@ -8,13 +15,14 @@ El objetivo de este proyecto es hacer un juego, con ayuda de arte ascii que se e
 
 - Su objetivo es comer, cuantas más pueda, las distintas manzanas que aparecen de forma aleatoria en el mapa, y así crecer el tamaño de su cuerpo, evitando colisionar con las paredes que lo rodean y consigo mismo, si esto sucede el juego finaliza y mientras mayor sea su tamaño se obtendrá más puntuación.
 
-___
+
 ## Ejecutable del juego
-- En la terminal escribir make runmain
+Instalar todas las dependencias necesarias y dentro de la terminal de vscode ejecutar:
+> make runmain
 
 ## Controles
-- Flecha Abajo = Up
-- Flecha Arriba = Down
+- Flecha Abajo = Down
+- Flecha Arriba = Up
 - Flecha Derecha = Rigth
 - Flecha Izquierda = Left
 
@@ -38,14 +46,19 @@ ___
 
 ## Librerias
 - SFML
+- DevTools
 
 ## Plugins VSCode
-- material icon
-- plant uml
-- c/c++
+- Material Icon
+- Plant UML
+- GitGraph
+- C/C++
 
 ## Imagenes dentro del juego
 ![Imagen_1](assets/images/img1.png)
 ![Imagen_2](assets/images/img2.png)
 ![Imagen_3](assets/images/img3.png)
+
+## Video dentro del juego
+[![Video_Demostracion](https://img.youtube.com/vi/X58pwzmARHM)](https://youtu.be/X58pwzmARHM)
 ___
