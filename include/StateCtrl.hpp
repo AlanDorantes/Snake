@@ -4,7 +4,6 @@
 #include <stack>
 #include <memory>
 #include <State.hpp>
-#include <GameSnake.hpp>
 
 namespace Engine
 {

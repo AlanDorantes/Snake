@@ -20,6 +20,7 @@ public:
         m_cabeza = --m_cuerpo.end();
         m_cola = m_cuerpo.begin();
     }
+
     ~Snake()
     {
     }

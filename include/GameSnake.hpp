@@ -7,7 +7,6 @@
 #include <SFML/Graphics/CircleShape.hpp>
 
 #include <StateCtrl.hpp>
-#include <AssetCtrl.hpp>
 #include <MenuPr.hpp>
 #include <Control.hpp>
 
@@ -20,6 +19,7 @@ public:
         m_control->m_window->create(sf::VideoMode(640, 352), "Snake Game", sf::Style::Close);
         m_control->m_states->Agregar(std::make_unique<MenuPr>(m_control));
     }
+
     ~GameSnake()
     {
     }

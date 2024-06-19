@@ -5,13 +5,8 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Window/Event.hpp>
 
-#include <GameSnake.hpp>
 #include <Control.hpp>
-
-#include <GamePlay.hpp>
 #include <State.hpp>
-#include <StateCtrl.hpp>
-#include <Snake.hpp>
 
 class GameOver : public Engine::State
 {
@@ -32,6 +27,7 @@ public:
           m_salirPressed(false)
     {
     }
+
     ~GameOver()
     {
     }

@@ -1,31 +1,29 @@
 @startuml Snake
 
 class AssetCtrl{
-    +~AssetCtrl()
-    +AssetCtrl()
     -m_textures
     -m_fonts
+    +AssetCtrl()
+    +~AssetCtrl()
     +AgregarTextura(int, string, bool)
     +AgregarFuente(int, string)
     +TomarTextura(int)
     +TomarFuente(int)
-
+    
 }
 
 class GameOver {
-    +~GameOver()
-    +GameOver()
     -m_control
     -m_gameOverTitulo
     -m_salir
     -m_fondo
     -m_salirSelected
     -m_salirPressed
+    +GameOver()
+    +~GameOver()
 }
 
 class GamePlay {
-    +~GamePlay()
-    +GamePlay()
     -m_control
     -m_snake
     -m_manzana
@@ -36,19 +34,19 @@ class GamePlay {
     -m_scoreText
     -m_snakeDireccion
     -m_tiempoTranscurrido
+    +GamePlay()
+    +~GamePlay()
 }
 
 class GameSnake{
-    +~GameSnake()
-    +GameSnake()
     -m_control
     -timePerFrame
+    +GameSnake()
+    +~GameSnake()
     +Correr()
 }
 
 class MenuPr {
-    +~MenuPr()
-    +MenuPr()
     -m_control
     -m_titulo
     -m_jugar
@@ -58,15 +56,17 @@ class MenuPr {
     -m_jugarPressed
     -m_salirSelected
     -m_salirPressed
+    +MenuPr()
+    +~MenuPr()
 }
 
 class Snake{
-    +~Snake()
-    +Snake()
     -m_cuerpo
     -m_cabeza
     -m_cola
     -m_pos
+    +Snake()
+    +~Snake()
     +Inicializar(Texture, Texture)
     +Mover(Vector2f, Texture, Texture)
     +Colisionar(Sprite)
@@ -75,8 +75,8 @@ class Snake{
 }
 
 class State{
-    +~State()
     +State()
+    +~State()
     +Inicializar()
     +Actualizar()
     +Dibujar()
@@ -84,14 +84,16 @@ class State{
 }
 
 class StateCtrl{
-    +~StateCtrl()
-    +StateCtrl
+    
+    
     -m_stateStack
     -m_newState
     -m_add
     -m_replace
     -m_remove
     -m_removeAll
+    +StateCtrl()
+    +~StateCtrl()
     +EliminarActual()
     +Agregar(State, bool)
     +EliminarTodo()
@@ -109,6 +111,6 @@ GameSnake o-- StateCtrl
 GameOver "1" o-- "*" AssetCtrl
 GamePlay *-- Snake
 GamePlay "1" o-- "*" AssetCtrl
-MenuPr "1" o-- "*" AssetCtrl
+MenuPr "1" o-- "*" AssetCtrl
 
 @enduml

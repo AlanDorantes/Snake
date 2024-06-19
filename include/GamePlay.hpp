@@ -11,7 +11,6 @@
 #include <SFML/Graphics/Text.hpp>
 
 #include "GameOver.hpp"
-#include "GameSnake.hpp"
 #include "State.hpp"
 #include "Snake.hpp"
 
@@ -25,21 +24,18 @@ private:
     std::array<sf::Sprite, 4> m_muro;
     Snake m_snake;
     sf::Text m_scoreText;
-    int m_score;
-
     sf::Vector2f m_snakeDireccion;
     sf::Time m_tiempoTranscurrido;
+    int m_score;
 
 public:
-    GamePlay(std::shared_ptr<Control> &control)
-        : m_control(control),
-          m_snakeDireccion({16.f, 0.f}),
-          m_tiempoTranscurrido(sf::Time::Zero),
-          m_score(0)
+    GamePlay(std::shared_ptr<Control> &control) : m_control(control), m_snakeDireccion({16.f, 0.f}),
+                                                  m_tiempoTranscurrido(sf::Time::Zero), m_score(0)
     {
         srand(time(nullptr));
         int m_score;
     }
+
     ~GamePlay()
     {
     }

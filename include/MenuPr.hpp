@@ -9,7 +9,6 @@
 #include <State.hpp>
 #include <GameSnake.hpp>
 #include <Control.hpp>
-
 #include "GamePlay.hpp"
 
 class MenuPr : public Engine::State
@@ -34,6 +33,7 @@ public:
                                                 m_salirPressed(false)
     {
     }
+
     ~MenuPr()
     {
     }
