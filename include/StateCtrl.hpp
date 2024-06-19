@@ -78,7 +78,7 @@ namespace Engine
                 if (!m_stateStack.empty())
                 {
                     // Inicia el estado que este en la cima de la pila
-                    m_stateStack.top()->Start();
+                    m_stateStack.top()->Iniciar();
                 }
 
                 // Regresa a false para no eliminar mas estados
@@ -101,15 +101,15 @@ namespace Engine
                 if (!m_stateStack.empty())
                 {
                     // Pausa el estado que este en la cima de la pila
-                    m_stateStack.top()->Pause();
+                    m_stateStack.top()->Pausar();
                 }
 
                 // Pone el nuevo estado en la cima de la pila
                 m_stateStack.push(std::move(m_newState));
                 // Empieza el estado en la cima de la pila
-                m_stateStack.top()->Start();
+                m_stateStack.top()->Iniciar();
                 // Inicializa el estado en la cima de la pila
-                m_stateStack.top()->Init();
+                m_stateStack.top()->Inicializar();
 
                 // Regresa a false para no añadir mas estados
                 m_add = false;

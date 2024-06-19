@@ -44,7 +44,7 @@ public:
     {
     }
 
-    void Init() override
+    void Inicializar() override
     {
         m_control->m_assets->AddTexture(MAPA, "assets/images/mapa.png", true);
         m_control->m_assets->AddTexture(MANZANA, "assets/images/manzana.png");
@@ -74,7 +74,7 @@ public:
         m_manzana.setTexture(m_control->m_assets->GetTexture(MANZANA));
         m_manzana.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2);
 
-        m_snake.Init(m_control->m_assets->GetTexture(SNAKE), m_control->m_assets->GetTexture(SNAKE_HEAD_D));
+        m_snake.Inicializar(m_control->m_assets->GetTexture(SNAKE), m_control->m_assets->GetTexture(SNAKE_HEAD_D));
 
         m_scoreText.setFont(m_control->m_assets->GetFont(MAIN_FONT));
         m_scoreText.setString("Score: " + std::to_string(m_score));
@@ -83,7 +83,7 @@ public:
         m_scoreText.setOrigin(m_scoreText.getGlobalBounds().width / 2, m_scoreText.getGlobalBounds().height / 2);
         m_scoreText.setPosition(m_control->m_window->getSize().x / 2, 4);
     }
-    void ProcessInput() override
+    void ProcesarEntrada() override
     {
         sf::Event event;
         while (m_control->m_window->pollEvent(event))
@@ -122,7 +122,7 @@ public:
         }
     }
 
-    void Update(sf::Time deltaTime) override
+    void Actualizar(sf::Time deltaTime) override
     {
         m_tiempoTranscurrido += deltaTime;
 
@@ -184,7 +184,7 @@ public:
         }
     }
 
-    void Draw() override
+    void Dibujar() override
     {
         m_control->m_window->clear();
         m_control->m_window->draw(m_mapa);

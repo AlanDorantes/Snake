@@ -24,7 +24,7 @@ public:
     {
     }
 
-    void Init(const sf::Texture &textura, const sf::Texture &texturaPrimeraPieza)
+    void Inicializar(const sf::Texture &textura, const sf::Texture &texturaPrimeraPieza)
     {
         float x = 16.f;
         for (auto &piece : m_cuerpo)
@@ -62,7 +62,7 @@ public:
         m_cabeza->setTexture(texturaPrimeraPieza);
     }
 
-    bool Colision(const sf::Sprite &objeto) const
+    bool Colisionar(const sf::Sprite &objeto) const
     {
         // COLISION CON MUROS
         sf::FloatRect cabezaBounds = m_cabeza->getGlobalBounds();
@@ -94,7 +94,7 @@ public:
         m_cabeza = m_cuerpo.insert(++m_cabeza, nuevaPieza);
     }
 
-    bool AutoColision() const
+    bool AutoColusionar() const
     {
         bool flag = false;
 
@@ -102,7 +102,7 @@ public:
         {
             if (m_cabeza != piece)
             {
-                flag = Colision(*piece);
+                flag = Colisionar(*piece);
 
                 if (flag)
                 {

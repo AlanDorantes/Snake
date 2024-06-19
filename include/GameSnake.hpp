@@ -47,11 +47,11 @@ public:
                 if (!m_control->m_states->IsEmpty())
                 {
                     // Toma el estado actual y le permite procesar entradas
-                    m_control->m_states->GetCurrent()->ProcessInput();
+                    m_control->m_states->GetCurrent()->ProcesarEntrada();
                     // El estado actual se actualiza
-                    m_control->m_states->GetCurrent()->Update(timePerFrame);
+                    m_control->m_states->GetCurrent()->Actualizar(timePerFrame);
                     // Dibuja los sprites y textos en la ventana
-                    m_control->m_states->GetCurrent()->Draw();
+                    m_control->m_states->GetCurrent()->Dibujar();
                 }
 
                 else

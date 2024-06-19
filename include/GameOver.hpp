@@ -36,7 +36,7 @@ public:
     {
     }
 
-    void Init() override
+    void Inicializar() override
     {
         // Carga fondo
         m_fondo.setTexture(m_control->m_assets->GetTexture(FONDO));
@@ -63,7 +63,7 @@ public:
         m_salir.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2 + 75.f);
     }
 
-    void ProcessInput() override
+    void ProcesarEntrada() override
     {
         sf::Event event;
         while (m_control->m_window->pollEvent(event))
@@ -88,7 +88,7 @@ public:
         }
     }
 
-    void Update(sf::Time deltaTime) override
+    void Actualizar(sf::Time deltaTime) override
     {
         if (m_salirPressed)
         {
@@ -96,7 +96,7 @@ public:
         }
     }
 
-    void Draw() override
+    void Dibujar() override
     {
         m_control->m_window->clear();
         m_control->m_window->draw(m_fondo);
