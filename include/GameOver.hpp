@@ -20,7 +20,6 @@ private:
     std::shared_ptr<Control> m_control;
 
     sf::Text m_gameOverTitulo;
-    sf::Text m_puntuacion;
     sf::Text m_salir;
     sf::Sprite m_fondo;
 

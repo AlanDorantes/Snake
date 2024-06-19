@@ -17,7 +17,6 @@ namespace Engine
         // Contenedores de texturas y fuentes en map
         std::map<int, std::unique_ptr<sf::Texture>> m_textures;
         std::map<int, std::unique_ptr<sf::Font>> m_fonts;
-        std::map<int, std::unique_ptr<sf::SoundBuffer>> m_soundBuffers;
 
     public:
         // Constructor sin cambios
@@ -66,22 +65,6 @@ namespace Engine
             }
         }
 
-        // Agrega buffer de sonido
-        // 1er parametro es el id del buffer de sonido
-        // 2do parametro es la ruta del archivo del buffer de sonido
-        void AddSoundBuffer(int id, const std::string &filePath)
-        {
-            // Crea un nuevo buffer de sonido con un puntero unico
-            auto soundBuffer = std::make_unique<sf::SoundBuffer>();
-
-            // Carga el buffer de sonido del archivo e indica si se carga correctamente
-            if (soundBuffer->loadFromFile(filePath))
-            {
-                // Guarda el buffer de sonido en el map en el id correspondiente
-                m_soundBuffers[id] = std::move(soundBuffer);
-            }
-        }
-
         // Devuelve la textura cargada en el map
         // Se agrega const para que no se pueda modificar la textura
         const sf::Texture &GetTexture(int id) const
@@ -96,14 +79,6 @@ namespace Engine
         {
             // Devuelve la fuente com el id correspondiente
             return *(m_fonts.at(id).get());
-        }
-
-        // Devuelve el buffer de sonido cargado en el map
-        // Se agrega const para que no se pueda modificar el buffer de sonido
-        const sf::SoundBuffer &GetSoundBuffer(int id) const
-        {
-            // Devuelve el buffer de sonido con el id correspondiente
-            return *(m_soundBuffers.at(id).get());
         }
     };
 }

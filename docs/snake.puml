@@ -1,78 +1,105 @@
 @startuml Snake
 
-class JuegoSnake {
-    +Inicializar()
-    +Finalizar()
+class AssetCtrl{
+    -m_textures
+    -m_fonts
+    +AddTexture(int, string, bool)
+    +AddFont(int, string)
+    +GetTexture(int)
+    +GetFont(int)
+
 }
 
-class Jugador
-
-class Snake {
-    -tamaño
-    +MoverIzquierda(Posicion)
-    +MoverDerecha(Posicion)
-    +MoverArriba(Posicion)
-    +MoverAbajo(Posicion)
-    +Comer(Manzana)
+class  Contro{
+    -m_window
+    -m_assets
+    -m_window
 }
 
-class Velocidad {
-    +Aumentar(Puntuacion)
+class GameOver {
+    -m_control
+    -m_gameOverTitulo
+    -m_salir
+    -m_fondo
+    -m_salirSelected
+    -m_salirPressed
 }
 
-class Posicion {
-    -posX
-    -posY
+class GamePlay {
+    -m_control
+    -m_snake
+    -m_manzana
+    -m_score
+    -m_muro
+    -m_mapa
+    -m_musica
+    -m_scoreText
+    -m_snakeDireccion
+    -m_tiempoTranscurrido
 }
 
-class Manzana {
-    +Generar(Posicion)
-    +Desaparecer(Snake)
+class GameSnake{
+    -m_control
+    -timePerFrame
+    +Run()
 }
 
-class ObjetoDestruible 
-
-class ObjetoIndestructible
-
-class Puntuacion {
-    +Incrementar(Manzana)
-    +Reiniciar()
+class MenuPr {
+    -m_control
+    -m_titulo
+    -m_jugar
+    -m_salir
+    -m_fondo
+    -m_jugarSelected
+    -m_jugarPressed
+    -m_salirSelected
+    -m_salirPressed
 }
 
-class Mapa {
-    -dimensiones
+class Snake{
+    -m_cuerpo
+    -m_cabeza
+    -m_cola
+    -m_pos
+    +Init(Texture, Texture)
+    +Mover(Vector2f, Texture, Texture)
+    +Colision(Sprite)
+    +Crecer(Vector2f, Texture)
+    +AutoColision()
 }
 
-class Muro {
-    +DetectarColision(Snake)
+class State{
+    +Init()
+    +Update()
+    +Draw()
+    +ProcessInput(Time)
 }
 
-class Musica {
-    +Reproducir()
-    +Pausar()
+class StateCtrl{
+    -m_stateStack
+    -m_newState
+    -m_add
+    -m_replace
+    -m_remove
+    -m_removeAll
+    +PopCurrent()
+    +Add(State, bool)
+    +PopAll()
+    +ProcessStateChanges()
+    +IsEmpty()
 }
 
-class Partida {
-    +Iniciar()
-    +Terminar(Snake)
-    +Reiniciar(Snake)
-}
-
-Mapa *-- Muro
-Jugador "1" *-- "*" Partida
-Jugador "1" o-- "1" Snake
-Snake *-- Posicion
-Snake *-- Velocidad
-Snake o-- Manzana
-JuegoSnake "1" *-- "1" Jugador
-JuegoSnake *-- Musica
-JuegoSnake "1" *-- "*" Partida
-Partida "1" *-- "*" Puntuacion
-Partida *-- Mapa
-Manzana *-- Posicion
-Manzana --|> ObjetoDestruible
-Manzana --|> Puntuacion
-Velocidad "1" o-- "*" Puntuacion
-Muro --|> ObjetoIndestructible
+GameSnake *-- GameOver
+GameSnake *-- GamePlay
+GameSnake *-- MenuPr
+MenuPr "1" *-- "*" AssetCtrl
+GamePlay "1" *-- "*" AssetCtrl
+GameOver "1" *-- "*" AssetCtrl
+GamePlay "1" *-- "1" Snake
+GameOver --|> "*" State
+GamePlay --|> "*" State
+MenuPr --|> "*" State
+StateCtrl o-- State
+GameSnake o-- StateCtrl
 
 @enduml

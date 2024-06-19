@@ -200,10 +200,4 @@ public:
 
         m_control->m_window->display();
     }
-    void Pause() override
-    {
-    }
-    void Start() override
-    {
-    }
 };
