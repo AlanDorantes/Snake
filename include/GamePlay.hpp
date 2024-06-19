@@ -46,21 +46,21 @@ public:
 
     void Inicializar() override
     {
-        m_control->m_assets->AddTexture(MAPA, "assets/images/mapa.png", true);
-        m_control->m_assets->AddTexture(MANZANA, "assets/images/manzana.png");
-        m_control->m_assets->AddTexture(MURO, "assets/images/muro.png", true);
-        m_control->m_assets->AddTexture(SNAKE, "assets/images/snake.png");
-        m_control->m_assets->AddTexture(SNAKE_HEAD_I, "assets/images/snake_cab_i.png");
-        m_control->m_assets->AddTexture(SNAKE_HEAD_D, "assets/images/snake_cab_d.png");
-        m_control->m_assets->AddTexture(SNAKE_HEAD_AR, "assets/images/snake_cab_ar.png");
-        m_control->m_assets->AddTexture(SNAKE_HEAD_AB, "assets/images/snake_cab_ab.png");
+        m_control->m_assets->AgregarTextura(MAPA, "assets/images/mapa.png", true);
+        m_control->m_assets->AgregarTextura(MANZANA, "assets/images/manzana.png");
+        m_control->m_assets->AgregarTextura(MURO, "assets/images/muro.png", true);
+        m_control->m_assets->AgregarTextura(SNAKE, "assets/images/snake.png");
+        m_control->m_assets->AgregarTextura(SNAKE_HEAD_I, "assets/images/snake_cab_i.png");
+        m_control->m_assets->AgregarTextura(SNAKE_HEAD_D, "assets/images/snake_cab_d.png");
+        m_control->m_assets->AgregarTextura(SNAKE_HEAD_AR, "assets/images/snake_cab_ar.png");
+        m_control->m_assets->AgregarTextura(SNAKE_HEAD_AB, "assets/images/snake_cab_ab.png");
 
-        m_mapa.setTexture(m_control->m_assets->GetTexture(MAPA));
+        m_mapa.setTexture(m_control->m_assets->TomarTextura(MAPA));
         m_mapa.setTextureRect(m_control->m_window->getViewport(m_control->m_window->getDefaultView()));
 
         for (auto &muro : m_muro)
         {
-            muro.setTexture(m_control->m_assets->GetTexture(MURO));
+            muro.setTexture(m_control->m_assets->TomarTextura(MURO));
         }
 
         m_muro[0].setTextureRect({0, 0, (int)m_control->m_window->getSize().x, 16});
@@ -71,18 +71,19 @@ public:
         m_muro[3].setTextureRect({0, 0, 16, (int)m_control->m_window->getSize().y});
         m_muro[3].setPosition(m_control->m_window->getSize().x - 16, 0);
 
-        m_manzana.setTexture(m_control->m_assets->GetTexture(MANZANA));
+        m_manzana.setTexture(m_control->m_assets->TomarTextura(MANZANA));
         m_manzana.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2);
 
-        m_snake.Inicializar(m_control->m_assets->GetTexture(SNAKE), m_control->m_assets->GetTexture(SNAKE_HEAD_D));
+        m_snake.Inicializar(m_control->m_assets->TomarTextura(SNAKE), m_control->m_assets->TomarTextura(SNAKE_HEAD_D));
 
-        m_scoreText.setFont(m_control->m_assets->GetFont(MAIN_FONT));
+        m_scoreText.setFont(m_control->m_assets->TomarFuente(MAIN_FONT));
         m_scoreText.setString("Score: " + std::to_string(m_score));
         m_scoreText.setCharacterSize(14);
         m_scoreText.setFillColor(sf::Color::White);
         m_scoreText.setOrigin(m_scoreText.getGlobalBounds().width / 2, m_scoreText.getGlobalBounds().height / 2);
         m_scoreText.setPosition(m_control->m_window->getSize().x / 2, 4);
     }
+
     void ProcesarEntrada() override
     {
         sf::Event event;
@@ -132,16 +133,16 @@ public:
 
             for (auto &muro : m_muro)
             {
-                if (m_snake.Colision(muro))
+                if (m_snake.Colisionar(muro))
                 {
-                    m_control->m_states->Add(std::make_unique<GameOver>(m_control), true);
+                    m_control->m_states->Agregar(std::make_unique<GameOver>(m_control), true);
                     break;
                 }
             }
 
-            if (m_snake.Colision(m_manzana))
+            if (m_snake.Colisionar(m_manzana))
             {
-                m_snake.Crecer(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE));
+                m_snake.Crecer(m_snakeDireccion, m_control->m_assets->TomarTextura(SNAKE));
 
                 int x = 0, y = 0;
                 x = std::clamp<int>(rand() % m_control->m_window->getSize().x, 16, m_control->m_window->getSize().x - 2 * 16) / 16;
@@ -159,25 +160,25 @@ public:
             {
                 if (m_snakeDireccion == sf::Vector2f(0.f, -16.f))
                 {
-                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_AR), m_control->m_assets->GetTexture(SNAKE));
+                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->TomarTextura(SNAKE_HEAD_AR), m_control->m_assets->TomarTextura(SNAKE));
                 }
                 else if (m_snakeDireccion == sf::Vector2f(0.f, 16.f))
                 {
-                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_AB), m_control->m_assets->GetTexture(SNAKE));
+                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->TomarTextura(SNAKE_HEAD_AB), m_control->m_assets->TomarTextura(SNAKE));
                 }
                 else if (m_snakeDireccion == sf::Vector2f(-16.f, 0.f))
                 {
-                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_I), m_control->m_assets->GetTexture(SNAKE));
+                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->TomarTextura(SNAKE_HEAD_I), m_control->m_assets->TomarTextura(SNAKE));
                 }
                 else if (m_snakeDireccion == sf::Vector2f(16.f, 0.f))
                 {
-                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->GetTexture(SNAKE_HEAD_D), m_control->m_assets->GetTexture(SNAKE));
+                    m_snake.Mover(m_snakeDireccion, m_control->m_assets->TomarTextura(SNAKE_HEAD_D), m_control->m_assets->TomarTextura(SNAKE));
                 }
             }
 
-            if (m_snake.AutoColision())
+            if (m_snake.AutoColisionar())
             {
-                m_control->m_states->Add(std::make_unique<GameOver>(m_control), true);
+                m_control->m_states->Agregar(std::make_unique<GameOver>(m_control), true);
             }
 
             m_tiempoTranscurrido = sf::Time::Zero;

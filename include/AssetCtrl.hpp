@@ -33,7 +33,7 @@ namespace Engine
         // 1er parametro es el id de la textura
         // 2do parametro es la ruta del archivo de la textura
         // 3er parametro indica si se quiere que la textura se repita
-        void AddTexture(int id, const std::string &filePath, bool wantRepeated = false)
+        void AgregarTextura(int id, const std::string &filePath, bool wantRepeated = false)
         {
             // Crea una nueva textura con un puntero unico
             auto texture = std::make_unique<sf::Texture>();
@@ -52,7 +52,7 @@ namespace Engine
         // Agrega fuente
         // 1er parametro es el id de la fuente
         // 2do parametro es la ruta del archivo de la fuente
-        void AddFont(int id, const std::string &filePath)
+        void AgregarFuente(int id, const std::string &filePath)
         {
             // Crea una nueva fuente con un puntero unico
             auto font = std::make_unique<sf::Font>();
@@ -67,7 +67,7 @@ namespace Engine
 
         // Devuelve la textura cargada en el map
         // Se agrega const para que no se pueda modificar la textura
-        const sf::Texture &GetTexture(int id) const
+        const sf::Texture &TomarTextura(int id) const
         {
             // Devuelve la textura con el id correspondiente
             return *(m_textures.at(id).get());
@@ -75,7 +75,7 @@ namespace Engine
 
         // Devuelve la fuente cargada en el map
         // Se agrega const para que no se pueda modificar la fuente
-        const sf::Font &GetFont(int id) const
+        const sf::Font &TomarFuente(int id) const
         {
             // Devuelve la fuente com el id correspondiente
             return *(m_fonts.at(id).get());

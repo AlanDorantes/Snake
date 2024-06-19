@@ -18,13 +18,13 @@ public:
     {
         // Crea una ventana de 640x352 pixeles
         m_control->m_window->create(sf::VideoMode(640, 352), "Snake Game", sf::Style::Close);
-        m_control->m_states->Add(std::make_unique<MenuPr>(m_control));
+        m_control->m_states->Agregar(std::make_unique<MenuPr>(m_control));
     }
     ~GameSnake()
     {
     }
 
-    void Run()
+    void Correr()
     {
 
         sf::Clock clock;
@@ -42,16 +42,16 @@ public:
                 timeSinceLastUpdate -= timePerFrame;
 
                 // Cambio de estado antes de que se realice la actualizacion
-                m_control->m_states->ProcessStateChange();
+                m_control->m_states->ProcesarCambioEstado();
 
-                if (!m_control->m_states->IsEmpty())
+                if (!m_control->m_states->ActivarVacio())
                 {
                     // Toma el estado actual y le permite procesar entradas
-                    m_control->m_states->GetCurrent()->ProcesarEntrada();
+                    m_control->m_states->DevolverActual()->ProcesarEntrada();
                     // El estado actual se actualiza
-                    m_control->m_states->GetCurrent()->Actualizar(timePerFrame);
+                    m_control->m_states->DevolverActual()->Actualizar(timePerFrame);
                     // Dibuja los sprites y textos en la ventana
-                    m_control->m_states->GetCurrent()->Dibujar();
+                    m_control->m_states->DevolverActual()->Dibujar();
                 }
 
                 else

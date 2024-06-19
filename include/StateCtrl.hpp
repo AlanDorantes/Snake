@@ -36,7 +36,7 @@ namespace Engine
         // Añadir un nuevo estado a la pila
         // 1er parametro es el estado a añadir
         // 2do parametro indica si se reemplaza el estado actual
-        void Add(std::unique_ptr<State> toAdd, bool replace = false)
+        void Agregar(std::unique_ptr<State> toAdd, bool replace = false)
         {
             m_add = true;
 
@@ -47,19 +47,19 @@ namespace Engine
         }
 
         // Eliminar el estado actual de la pila
-        void PopCurrent()
+        void EliminarActual()
         {
             m_remove = true;
         }
 
-        void PopAll()
+        void EliminarTodo()
         {
             m_removeAll = true;
             m_remove = false;
         }
 
         // Modificar la pila de estados
-        void ProcessStateChange()
+        void ProcesarCambioEstado()
         {
             if (m_removeAll)
             {
@@ -117,13 +117,13 @@ namespace Engine
         }
 
         // Devolver el estado actual
-        std::unique_ptr<Engine::State> &GetCurrent()
+        std::unique_ptr<Engine::State> &DevolverActual()
         {
             // Regresa el estado en la cima de la pila
             return m_stateStack.top();
         }
 
-        bool IsEmpty() const
+        bool ActivarVacio() const
         {
             return m_stateStack.empty();
         }

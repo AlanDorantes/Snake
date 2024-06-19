@@ -94,7 +94,7 @@ public:
         m_cabeza = m_cuerpo.insert(++m_cabeza, nuevaPieza);
     }
 
-    bool AutoColusionar() const
+    bool AutoColisionar() const
     {
         bool flag = false;
 

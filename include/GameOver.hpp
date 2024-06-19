@@ -39,10 +39,10 @@ public:
     void Inicializar() override
     {
         // Carga fondo
-        m_fondo.setTexture(m_control->m_assets->GetTexture(FONDO));
+        m_fondo.setTexture(m_control->m_assets->TomarTextura(FONDO));
 
         // Configura el mensaje de game over
-        m_gameOverTitulo.setFont(m_control->m_assets->GetFont(MAIN_FONT));
+        m_gameOverTitulo.setFont(m_control->m_assets->TomarFuente(MAIN_FONT));
         m_gameOverTitulo.setString("GAME OVER");
         m_gameOverTitulo.setCharacterSize(80);
         m_gameOverTitulo.setFillColor(sf::Color::Red);
@@ -53,7 +53,7 @@ public:
         m_gameOverTitulo.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 4);
 
         // Configura el boton salir
-        m_salir.setFont(m_control->m_assets->GetFont(MAIN_FONT));
+        m_salir.setFont(m_control->m_assets->TomarFuente(MAIN_FONT));
         m_salir.setString("EXIT");
         m_salir.setCharacterSize(40);
         m_salir.setFillColor(sf::Color::Red);

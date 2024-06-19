@@ -3,7 +3,7 @@
 int main()
 {
     GameSnake game;
-    game.Run();
+    game.Correr();
 
     return 0;
 }

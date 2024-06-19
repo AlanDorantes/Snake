@@ -41,14 +41,14 @@ public:
     void Inicializar() override
     {
         // Carga la fuente
-        m_control->m_assets->AddFont(MAIN_FONT, "assets/fonts/RetroGaming.ttf");
+        m_control->m_assets->AgregarFuente(MAIN_FONT, "assets/fonts/RetroGaming.ttf");
 
         // Carga fondo
-        m_control->m_assets->AddTexture(FONDO, "assets/images/fondo_grass.png", true);
-        m_fondo.setTexture(m_control->m_assets->GetTexture(FONDO));
+        m_control->m_assets->AgregarTextura(FONDO, "assets/images/fondo_grass.png", true);
+        m_fondo.setTexture(m_control->m_assets->TomarTextura(FONDO));
 
         // Configura el titulo
-        m_titulo.setFont(m_control->m_assets->GetFont(MAIN_FONT));
+        m_titulo.setFont(m_control->m_assets->TomarFuente(MAIN_FONT));
         m_titulo.setString("SNAKE GAME");
         m_titulo.setFillColor(sf::Color::White);
         m_titulo.setCharacterSize(65);
@@ -60,7 +60,7 @@ public:
         m_titulo.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 4);
 
         // Configura el boton jugar
-        m_jugar.setFont(m_control->m_assets->GetFont(MAIN_FONT));
+        m_jugar.setFont(m_control->m_assets->TomarFuente(MAIN_FONT));
         m_jugar.setString("PLAY");
         m_jugar.setCharacterSize(40);
         m_jugar.setOutlineColor(sf::Color::Black);
@@ -69,7 +69,7 @@ public:
         m_jugar.setPosition(m_control->m_window->getSize().x / 2, m_control->m_window->getSize().y / 2 + 25.f);
 
         // Configura el boton salir
-        m_salir.setFont(m_control->m_assets->GetFont(MAIN_FONT));
+        m_salir.setFont(m_control->m_assets->TomarFuente(MAIN_FONT));
         m_salir.setString("EXIT");
         m_salir.setCharacterSize(40);
         m_salir.setOutlineColor(sf::Color::Black);
@@ -144,7 +144,7 @@ public:
         if (m_jugarPressed)
         {
             // Todo:
-            m_control->m_states->Add(std::make_unique<GamePlay>(m_control), true);
+            m_control->m_states->Agregar(std::make_unique<GamePlay>(m_control), true);
         }
         else if (m_salirPressed)
         {
