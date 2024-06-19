@@ -12,6 +12,12 @@ ___
 ## Ejecutable del juego
 - En la terminal escribir make runmain
 
+## Controles
+- Flecha Abajo = Up
+- Flecha Arriba = Down
+- Flecha Derecha = Rigth
+- Flecha Izquierda = Left
+
 ## Carpetas
 - bin/ - Contiene los ejecutables del proyecto
 - src/ - Contiene el código fuente
@@ -39,7 +45,7 @@ ___
 - c/c++
 
 ## Imagenes dentro del juego
-![Imagen_1](/assets/images/imag1.png)
-![Imagen_2](/assets/images/imag1.png)
-![Imagen_3](/assets/images/imag1.png)
+![Imagen_1](assets/images/img1.png)
+![Imagen_2](assets/images/img2.png)
+![Imagen_3](assets/images/img3.png)
 ___

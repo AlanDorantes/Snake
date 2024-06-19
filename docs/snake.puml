@@ -10,12 +10,6 @@ class AssetCtrl{
 
 }
 
-class  Contro{
-    -m_window
-    -m_assets
-    -m_window
-}
-
 class GameOver {
     -m_control
     -m_gameOverTitulo
@@ -100,6 +94,5 @@ GameOver --|> "*" State
 GamePlay --|> "*" State
 MenuPr --|> "*" State
 StateCtrl o-- State
-GameSnake o-- StateCtrl
 
 @enduml
