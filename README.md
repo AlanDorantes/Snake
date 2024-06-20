@@ -8,7 +8,7 @@ y editor Visual Studio Code.
 #### Josue Gael Guzman Chavez #23110129
 
 ## Objetivo
-El objetivo de este proyecto es hacer un juego, con ayuda de arte ascii que se ejecute en la misma terminal de Ubuntu, basado en el juego arcade Snake, y así reforzar los conocimientos que se han aprendido a lo largo del curso de Programación Avanzada.
+El objetivo de este proyecto es hacer un juego, con ayuda de la libreria SFML utilizando graficos, basado en el juego arcade Snake, y así reforzar los conocimientos que se han aprendido a lo largo del curso de Programación Avanzada.
 
 ## Descripción
 - El famoso juego "Snake" consiste en tomar el rol de una serpiente que se puede mover hacia delante, atrás, derecha e izquierda.
